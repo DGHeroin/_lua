@@ -19,10 +19,31 @@ SYSCFLAGS=
 SYSLDFLAGS=
 SYSLIBS=
 
-MYCFLAGS=
+MYCFLAGS=-I../src
 MYLDFLAGS=
 MYLIBS=
-MYOBJS=
+MYOBJS=pb/pb.o \
+luasocket/auxiliar.o \
+luasocket/buffer.o \
+luasocket/except.o \
+luasocket/inet.o \
+luasocket/io.o \
+luasocket/luasocket.o \
+luasocket/mime.o \
+luasocket/options.o \
+luasocket/select.o \
+luasocket/tcp.o \
+luasocket/timeout.o \
+luasocket/udp.o
+
+ifeq ($(OS),Windows_NT)
+MYOBJS += luasocket/wsocket.o
+else
+MYOBJS += luasocket/usocket.o
+endif
+
+
+
 
 # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
 
@@ -33,7 +54,8 @@ CORE_O=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o \
 	lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o \
 	ltm.o lundump.o lvm.o lzio.o
 LIB_O=	lauxlib.o lbaselib.o lbitlib.o lcorolib.o ldblib.o liolib.o \
-	lmathlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o loadlib.o linit.o
+	lmathlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o loadlib.o linit.o 
+
 BASE_O= $(CORE_O) $(LIB_O) $(MYOBJS)
 
 LUA_T=	lua
@@ -193,5 +215,8 @@ lvm.o: lvm.c lprefix.h lua.h luaconf.h ldebug.h lstate.h lobject.h \
  ltable.h lvm.h
 lzio.o: lzio.c lprefix.h lua.h luaconf.h llimits.h lmem.h lstate.h \
  lobject.h ltm.h lzio.h
+
+## PB ##
+pb/pb.o: pb/pb.c pb/pb.h
 
 # (end of Makefile)
