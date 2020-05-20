@@ -13,17 +13,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: libreadline
-      run: sudo apt-get install libreadline-dev
+    - name: Installation depends
+      run: |
+        sudo apt-get install libreadline-dev
     - name: make linux
       run: make linux
     - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: actions/upload-artifact@master
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: src/lua src/luac
-        asset_name: bin.zip
-        asset_content_type: application/zip
+        name: luacli
+        path: src/lua src/luac
