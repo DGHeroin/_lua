@@ -18,8 +18,8 @@ jobs:
         sudo apt-get install libreadline-dev
     - name: make linux
       run: make linux
-    - name: Upload Release Asset
+    - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: luacli
-        path: src/lua src/luac
+        name: lua
+        path: src/lua
