@@ -22,4 +22,6 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: lua
-        path: src/lua
+        path: |
+          src/lua
+          src/luac
