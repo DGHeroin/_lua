@@ -42,3 +42,23 @@ jobs:
       with:
         name: lua-osx.zip
         path: release/osx.zip
+  build-win:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - uses: actions/checkout@v2
+    - name: Installation depends
+      run: ls -al
+    - name: make win
+      run: make win
+    - name: copy files
+      run: mkdir -p release/win && cp src/lua.exe release/win/ && cp src/luac.exe release/win/
+    - name: archive files
+      run: cd release && zip -r win.zip win
+    - name: Upload Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: lua-win.zip
+        path: release/win.zip
