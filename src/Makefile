@@ -38,7 +38,7 @@ luasocket/udp.o
 
 ifeq ($(OS),Windows_NT)
 MYOBJS += luasocket/wsocket.o
-MYLDFLAGS += -Wl,-s -lws2_32 
+MYLDFLAGS += -Wl,-s -lws2_32 -lwsock32 
 else
 MYOBJS += luasocket/usocket.o
 endif
