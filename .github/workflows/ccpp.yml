@@ -49,8 +49,6 @@ jobs:
         shell: bash
     steps:
     - uses: actions/checkout@v2
-    - name: Installation depends
-      run: ls -al C:\\MinGW\\lib
     - name: make generic
       run: make generic
     - name: copy files
