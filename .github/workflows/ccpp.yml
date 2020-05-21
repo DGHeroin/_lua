@@ -36,7 +36,7 @@ jobs:
     - name: copy files
       run: mkdir -p release/osx && cp src/lua release/osx/ && cp src/luac release/osx/
     - name: archive files
-      run: cd release && zip -r linux.zip linux
+      run: cd release && zip -r osx.zip osx
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
