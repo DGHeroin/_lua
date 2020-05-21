@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -19,9 +19,26 @@ jobs:
     - name: copy files
       run: mkdir -p release/linux && cp src/lua release/linux/ && cp src/luac release/linux/
     - name: archive files
-      run: zip -r release/linux.zip release/linux
+      run: cd release && zip -r linux.zip linux
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: lua
+        name: lua-linux.zip
         path: release/linux.zip
+  build-osx:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Installation depends
+      run: ls -al
+    - name: make macosx
+      run: make macosx
+    - name: copy files
+      run: mkdir -p release/osx && cp src/lua release/osx/ && cp src/luac release/osx/
+    - name: archive files
+      run: cd release && zip -r linux.zip linux
+    - name: Upload Artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: lua-osx.zip
+        path: release/osx.zip
