@@ -19,12 +19,12 @@ jobs:
     - name: copy files
       run: mkdir -p release/linux && cp src/lua release/linux/ && cp src/luac release/linux/
     - name: archive files
-      run: cd release && zip -r linux.zip linux
+      run: cd release && tar cvf linux.tar linux
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: lua-linux.zip
-        path: release/linux.zip
+        name: lua-linux.tar
+        path: release/linux.tar
   build-osx:
     runs-on: macos-latest
     steps:
@@ -36,12 +36,12 @@ jobs:
     - name: copy files
       run: mkdir -p release/osx && cp src/lua release/osx/ && cp src/luac release/osx/
     - name: archive files
-      run: cd release && zip -r osx.zip osx
+      run: cd release && tar cvf osx.tar osx
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: lua-osx.zip
-        path: release/osx.zip
+        name: lua-osx.tar
+        path: release/osx.tar
   build-win:
     runs-on: windows-latest
     defaults:
@@ -54,9 +54,9 @@ jobs:
     - name: copy files
       run: mkdir -p release/win && cp src/lua.exe release/win/ && cp src/luac.exe release/win/
     - name: archive files
-      run: cd release && zip -r win.zip win
+      run: cd release && tar cvf win.tar win
     - name: Upload Artifact
       uses: actions/upload-artifact@master
       with:
-        name: lua-win.zip
-        path: release/win.zip
+        name: lua-win.tar
+        path: release/win.tar
